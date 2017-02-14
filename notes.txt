@@ -1,0 +1,64 @@
+SETUP:
+npm init
+npm install
+install gulp and react:
+npm install --save react@0.13.3 react-router@0.13.3 flux@2.0.3
+npm install --save gulp@3.9.0 gulp-connect@2.2.0 gulp-open@1.0.0
+npm install --save browserify@11.0.1 reactify@1.1.1 vinyl-source-stream@1.1.0
+npm install --save bootstrap@3.3.5 jquery@2.1.4 gulp-concat@2.6.0
+npm install --save gulp-eslint@0.15.0
+npm install --save react@0.13.3 react-router@0.13.3 flux@2.0.3
+npm install --save lodash
+
+React is the v and c in mvc
+React doesn't use two way binding
+unpredictable behavior
+use unidirectional data changes
+
+JSX:
+looks like html in js
+differences: className instead of class, etc
+compiles to js
+optional
+
+Putting html in js
+angular, ember, knockout, put js in html
+opposite of this
+
+Virtual dom only updates changes
+diffs current state with future state
+
+lifecycle methods:
+name: componentWillMount:
+when: before initial render, client and server
+why: set initial state
+
+name: componentDidMount
+when: after render
+why: integrate with frameworks, ajax
+
+name: componentWillReceiveProps
+when: Receiving new props, not on initial render
+why: set state before a render
+
+name: shouldComponentUpdate
+when:
+why: performance, return false for unnecessary render
+
+etc.
+
+keys for dynamic children
+add a key to dynamic child elements
+
+props give as a way to pass data to child elements
+stat is how we handle data into controller view
+
+controller views are a name for the top level react component
+sets props on children
+interacts with flux stores
+
+propTypes: {
+  author: React.PropTypes.object.isRequired,
+  onSave: React.PropTypes.func.isRequired,
+
+}
