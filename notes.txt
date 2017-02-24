@@ -1,3 +1,6 @@
+To run:
+gulp
+
 SETUP:
 npm init
 npm install
@@ -62,3 +65,77 @@ propTypes: {
   onSave: React.PropTypes.func.isRequired,
 
 }
+
+
+FLUX:
+A pattern
+central dispatcher
+facebooks flux implementation
+
+two-way binding:
+viewmodel -> view
+viewmodel <- view
+- a change in one changes the other
+
+unidirectional data binding:
+action -> dispatcher -> store -> react-view ->
+^                                           |
+|___________________________________________|
+- Information flows in one direction, more explicit, easy to update multiple stores on a given action
+
+ACTIONS:
+user interactions that occur in your components
+encapsulate events
+triggered by user interactions and server
+passed to dispatcher
+action payload has type and data:
+{
+  type: USER_SAVED,
+  data: {
+    firstName: 'Cory',
+    lastName: 'House'
+  }
+}
+
+DISPATCHER:
+notifies everyone who cares about the action
+singleton
+central hub, only one
+holds a list of callbacks
+broadcasts payload to registered call backs
+sends actions to stores
+
+STORES:
+Hold app state/data
+holds app state, logic, data retrieval
+Not a model- contains models
+one or many
+registers callbacks with dispatcher
+only stores register callbacks with dispatcher, not views
+uses nodes' EventEmitter
+Every store has these common traits (aka interface)
+1. Extend EventEmitter
+2. addChangeListener and removeChangeListener
+3. emitChange
+
+CONTROLLER VIEWS:
+React has the concept of the controller view, which is really just the top level component
+interacts with the stores, passes updated data down to children
+holds data in state, and pass it down through props
+
+FLUX API:
+register(function callback) - run this callback when actions happen (from store)
+unregister(string id) - stop listening to this action (from store)
+waitFor(array<string> ids) - specifies the order of callbacks (from store)
+dispatch(object payload) - dispatcher tell the stores about the actions (from actions)
+isDispatching() - boolean that is true when the dispatcher is dispatching
+
+
+
+var React = require('react');
+var Router = require('react-router');
+var AuthorActions = require('../../actions/authorActions');
+var AuthorStore = require('../../stores/authorStore');
+var Dispatcher = require('../dispatcher/appDispatcher');
+var AuthorApi = require('../api/authorApi');
+var ActionTypes = require('../constants/actionTypes');
